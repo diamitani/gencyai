@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GencyAI — AI Systems That Run Your Revenue</title>
+  <meta name="description" content="GencyAI builds production-grade AI automation for sales, marketing, and operations teams. Revenue engines, agentic infrastructure, and custom tools — deployed in days, not months.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B2A4A;
+      --navy-deep: #0f1b33;
+      --navy-light: #2d4470;
+      --bg: #f5f5f5;
+      --surface: #ffffff;
+      --ink: #111111;
+      --muted: #555555;
+      --light: #999999;
+      --border: #e2e2e2;
+      --accent: #3b5cff;
+      --accent-soft: #eef1ff;
+      --green: #10b981;
+      --green-soft: #ecfdf5;
+      --radius: 16px;
+      --shadow: 0 1px 3px rgba(0,0,0,.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(245,245,245,.88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1140px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 32px; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--navy); letter-spacing: -.02em; }
+    .nav-brand img { height: 26px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+    .nav-links a { color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border-radius: 99px; font-size: 13px; font-weight: 600; transition: all .2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy-light); }
+    .btn-outline { background: var(--surface); color: var(--ink); border: 1px solid var(--border); }
+    .btn-outline:hover { border-color: var(--navy); color: var(--navy); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: #2a48e0; }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-green:hover { background: #059669; }
+    .btn-lg { padding: 14px 28px; font-size: 15px; }
+
+    /* CONTAINER */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+
+    /* HERO */
+    .hero { padding: 100px 0 80px; text-align: center; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 99px; padding: 6px 16px; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 24px; }
+    .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+    .hero h1 { font-size: clamp(38px, 5.5vw, 60px); font-weight: 800; letter-spacing: -.04em; line-height: 1.08; margin-bottom: 20px; color: var(--navy-deep); }
+    .hero h1 span { background: linear-gradient(135deg, var(--accent), #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 18px; color: var(--muted); max-width: 580px; margin: 0 auto 36px; }
+    .hero-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* SECTIONS */
+    section { padding: 80px 0; }
+    .section-label { font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 16px; color: var(--navy-deep); }
+    .section-desc { font-size: 16px; color: var(--muted); max-width: 560px; margin-bottom: 48px; }
+
+    /* GRIDS */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+    /* CARDS */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); transition: box-shadow .25s, transform .25s; }
+    .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .card-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+    .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .card ul { list-style: none; margin-top: 12px; }
+    .card ul li { padding-left: 18px; position: relative; margin-bottom: 6px; font-size: 14px; color: var(--muted); }
+    .card ul li::before { content: "→"; position: absolute; left: 0; color: var(--light); font-size: 12px; }
+
+    /* SERVICE CARDS */
+    .service-card .card-icon.revenue { background: #fef3c7; color: #f59e0b; }
+    .service-card .card-icon.agents { background: #ede9fe; color: #7c3aed; }
+    .service-card .card-icon.apps { background: #dbeafe; color: #3b82f6; }
+
+    /* STEPS */
+    .step-num { width: 36px; height: 36px; border-radius: 10px; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+
+    /* PRICING */
+    .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: box-shadow .25s, transform .25s; }
+    .pricing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .pricing-card.featured { border: 2px solid var(--navy); position: relative; }
+    .pricing-card.featured::before { content: "Most Popular"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 4px 14px; border-radius: 99px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .pricing-amount { font-size: 40px; font-weight: 800; letter-spacing: -.03em; color: var(--navy-deep); }
+    .pricing-term { font-size: 14px; color: var(--light); margin-bottom: 20px; }
+    .pricing-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .pricing-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .pricing-list { list-style: none; margin-bottom: 24px; flex: 1; }
+    .pricing-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; display: flex; align-items: center; gap: 8px; }
+    .pricing-list li::before { content: "✓"; color: var(--green); font-weight: 700; font-size: 14px; }
+    .pricing-list li:last-child { border-bottom: none; }
+
+    /* CASE STUDIES */
+    .case-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
+    .case-tag { display: inline-block; background: var(--accent-soft); color: var(--accent); padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+    .case-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .case-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .case-metric { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; gap: 24px; }
+    .case-metric div { text-align: center; }
+    .case-metric .val { font-size: 22px; font-weight: 800; color: var(--navy); }
+    .case-metric .lbl { font-size: 11px; color: var(--light); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* FOUNDER */
+    .founder-section { background: var(--navy-deep); color: #fff; border-radius: 24px; padding: 48px; margin: 0 0 80px; }
+    .founder-section .section-label { color: rgba(255,255,255,.5); }
+    .founder-section .section-title { color: #fff; }
+    .founder-section p { color: rgba(255,255,255,.7); }
+    .founder-links { display: flex; gap: 12px; margin-top: 24px; }
+    .founder-links a { color: #fff; border: 1px solid rgba(255,255,255,.2); padding: 8px 16px; border-radius: 99px; font-size: 13px; font-weight: 500; transition: all .2s; }
+    .founder-links a:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 80px 0 100px; }
+    .cta-section h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -.03em; color: var(--navy-deep); margin-bottom: 16px; }
+    .cta-section p { font-size: 16px; color: var(--muted); max-width: 480px; margin: 0 auto 32px; }
+    .cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 13px; color: var(--light); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 0 40px; }
+      section { padding: 60px 0; }
+      .founder-section { padding: 32px 24px; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .hero-btns, .cta-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="gency-wordmark.png" alt="GencyAI">
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#work">Case Studies</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="https://calendly.com/diamitani" target="_blank" class="btn btn-primary">Book a Call</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge"><span class="dot"></span> Accepting new clients</div>
+    <h1>AI systems that <span>run your revenue.</span></h1>
+    <p>We build production-grade automation, agentic infrastructure, and custom tools for sales, marketing, and operations teams. Deployed in days, not months.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn btn-primary btn-lg">View Pricing →</a>
+      <a href="https://calendly.com/diamitani" target="_blank" class="btn btn-outline btn-lg">Book a Free Intro Call</a>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-label">What We Build</div>
+    <div class="section-title">Three pillars of your AI operating system.</div>
+    <div class="section-desc">Every engagement produces working infrastructure — not slide decks.</div>
+    <div class="grid-3">
+      <div class="card service-card">
+        <div class="card-icon revenue">⚡</div>
+        <h3>Revenue Automation</h3>
+        <p>End-to-end GTM engines that replace manual work with deterministic AI workflows.</p>
+        <ul>
+          <li>Inbound triage & intent classification</li>
+          <li>Outbound prospecting orchestration</li>
+          <li>Post-call intelligence & follow-up</li>
+          <li>CRM configuration & reporting</li>
+        </ul>
+      </div>
+      <div class="card service-card">
+        <div class="card-icon agents">🤖</div>
+        <h3>Agentic Infrastructure</h3>
+        <p>Deploy autonomous AI agent teams that execute business operations 24/7.</p>
+        <ul>
+          <li>OpenClaw / Paperclip agent setup</li>
+          <li>Claude Code & Cowork platforms</li>
+          <li>Multi-agent orchestration design</li>
+          <li>Custom skill & tool development</li>
+        </ul>
+      </div>
+      <div class="card service-card">
+        <div class="card-icon apps">🛠</div>
+        <h3>Skills & Web Apps</h3>
+        <p>Custom-built tools, dashboards, and internal applications for your team.</p>
+        <ul>
+          <li>Internal dashboards & CRMs</li>
+          <li>Proposal & presentation generators</li>
+          <li>Data enrichment pipelines</li>
+          <li>Client-facing portals</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="section-label">Process</div>
+    <div class="section-title">From audit to operating system in days.</div>
+    <div class="section-desc">A focused, founder-friendly build process. No bloat, no committees.</div>
+    <div class="grid-4">
+      <div class="card">
+        <div class="step-num">1</div>
+        <h3>Audit</h3>
+        <p>We map your current stack, gaps, and highest-leverage automation opportunities.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">2</div>
+        <h3>Design</h3>
+        <p>Architecture diagrams, ICP logic, prompt strategy, and tool selection — locked in 48 hours.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">3</div>
+        <h3>Build</h3>
+        <p>Working prototypes, agent configs, CRM setup, and workflow orchestration — deployed and tested.</p>
+      </div>
+      <div class="card">
+        <div class="step-num">4</div>
+        <h3>Handoff</h3>
+        <p>Playbooks, documentation, build prompts, and training so your team can run and extend the system.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Transparent pricing. No surprises.</div>
+    <div class="section-desc">Pick the engagement that fits your stage. Every tier includes a live call and working deliverables.</div>
+    <div class="grid-4">
+
+      <div class="pricing-card">
+        <div class="pricing-name">Strategy Call</div>
+        <div class="pricing-desc">1hr consultation + 30min live build session.</div>
+        <div class="pricing-amount">$250</div>
+        <div class="pricing-term">One-time</div>
+        <ul class="pricing-list">
+          <li>60-minute strategy consultation</li>
+          <li>30-minute live build session</li>
+          <li>Claude Cowork platform setup</li>
+          <li>OpenClaw basics configured</li>
+          <li>Action plan & next steps doc</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/GU76JHXHYPNQL" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center;">Pay & Book →</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-name">Agent Setup</div>
+        <div class="pricing-desc">OpenClaw/Paperclip agent team deployed with 1hr call.</div>
+        <div class="pricing-amount">$499</div>
+        <div class="pricing-term">One-time</div>
+        <ul class="pricing-list">
+          <li>1-hour onboarding call</li>
+          <li>OpenClaw / Paperclip config</li>
+          <li>Agent hierarchy & roles defined</li>
+          <li>Working agent team deployed</li>
+          <li>Setup documentation</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/GU76JHXHYPNQL" target="_blank" class="btn btn-outline" style="width:100%;justify-content:center;">Pay & Book →</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-name">Sprint</div>
+        <div class="pricing-desc">1-week activation sprint. Full build + handoff.</div>
+        <div class="pricing-amount">$1,500</div>
+        <div class="pricing-term">One-time / 1 week</div>
+        <ul class="pricing-list">
+          <li>Intro call & business audit</li>
+          <li>Working prototype delivered</li>
+          <li>Skills & agents configured</li>
+          <li>Build prompts for continuation</li>
+          <li>Playbooks & architecture diagrams</li>
+          <li>Team training session</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/GU76JHXHYPNQL" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">Pay & Book →</a>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-desc">Project-based or monthly retainer. Scoped to your needs.</div>
+        <div class="pricing-amount">Custom</div>
+        <div class="pricing-term">Project / Retainer</div>
+        <ul class="pricing-list">
+          <li>Full GTM architecture buildout</li>
+          <li>Multi-workflow automation</li>
+          <li>Ongoing optimization & support</li>
+          <li>Dedicated Slack/Teams channel</li>
+          <li>Custom agent teams at scale</li>
+          <li>Priority SLA & weekly reviews</li>
+        </ul>
+        <a href="https://calendly.com/diamitani" target="_blank" class="btn btn-accent" style="width:100%;justify-content:center;">Schedule Discovery →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="work">
+    <div class="section-label">Case Studies</div>
+    <div class="section-title">Results from real engagements.</div>
+    <div class="section-desc">Client names withheld. Outcomes speak for themselves.</div>
+    <div class="grid-3">
+      <div class="case-card">
+        <span class="case-tag">Revenue Automation</span>
+        <h4>Series A AI/Sales SaaS</h4>
+        <p>6-person sales team with 9x revenue growth but no sales process. Deployed full GTM architecture — inbound triage, outbound prospecting, and post-call intelligence — in a single 30-day sprint.</p>
+        <div class="case-metric">
+          <div><div class="val">3</div><div class="lbl">Engines</div></div>
+          <div><div class="val">30</div><div class="lbl">Days</div></div>
+          <div><div class="val">0→1</div><div class="lbl">Sales Process</div></div>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">Inbound Automation</span>
+        <h4>B2B HXM Platform</h4>
+        <p>Enterprise HR tech company spending 4+ hours daily on manual inbound triage. Deployed an LLM intent classification engine that routes, classifies, and drafts responses in under 30 seconds.</p>
+        <div class="case-metric">
+          <div><div class="val">&lt;30s</div><div class="lbl">Triage Time</div></div>
+          <div><div class="val">100%</div><div class="lbl">Routing Accuracy</div></div>
+          <div><div class="val">4hrs</div><div class="lbl">Saved Daily</div></div>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">Skills & Apps</span>
+        <h4>Political Campaign Tech</h4>
+        <p>Built a constituent intelligence CRM, precinct strategy app, and voter outreach dashboard for a Chicago ward campaign — from zero infrastructure to full deployment in one week.</p>
+        <div class="case-metric">
+          <div><div class="val">4,200+</div><div class="lbl">Records</div></div>
+          <div><div class="val">7</div><div class="lbl">Days</div></div>
+          <div><div class="val">3</div><div class="lbl">Apps Built</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <div class="founder-section" id="about">
+    <div class="section-label">About</div>
+    <div class="section-title">Built by Patrick Diamitani.</div>
+    <p style="max-width:560px;font-size:15px;line-height:1.8;margin-bottom:8px;">
+      Forward Deployed AI Engineer based in Chicago. I build revenue systems, agentic infrastructure, and custom tools for startups, campaigns, and growth-stage companies. Background in sales operations, GTM strategy, and full-stack automation.
+    </p>
+    <p style="max-width:560px;font-size:15px;line-height:1.8;">
+      Previously built systems at Atlas HXM. Published AI builder on LinkedIn with a focus on practical, production-grade workflows using Claude, n8n, Clay, Make.com, and modern orchestration tooling.
+    </p>
+    <div class="founder-links">
+      <a href="https://linkedin.com/in/diamitani" target="_blank">LinkedIn ↗</a>
+      <a href="https://calendly.com/diamitani" target="_blank">Calendly ↗</a>
+      <a href="mailto:patrick.diamitani@gmail.com">Email ↗</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to build?</h2>
+    <p>Book a free intro call or pick a tier and get started today. Every engagement ships working infrastructure.</p>
+    <div class="cta-btns">
+      <a href="https://calendly.com/diamitani" target="_blank" class="btn btn-primary btn-lg">Book a Call →</a>
+      <a href="#pricing" class="btn btn-outline btn-lg">View Pricing</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container">© 2026 GencyAI · patrick.diamitani@gmail.com · <a href="https://linkedin.com/in/diamitani" target="_blank" style="color:var(--muted)">LinkedIn</a></div>
+</footer>
+
+</body>
+</html>
