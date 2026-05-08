@@ -65,6 +65,56 @@
   </div>
 </section>
 
+<section id="wizard" style="background: var(--surface); border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border);">
+  <div class="centered">
+    <div class="section-label">Interactive Demo</div>
+    <div class="section-title">Test The <span class="serif-i">Engine.</span></div>
+    <div class="section-desc">Paste an example of a manual task or SOP below, and see how our ROSTR system maps the intent and builds the architecture.</div>
+  </div>
+  
+  <div class="wizard-container" style="max-width: 800px; margin: 0 auto; background: #fff; border: 1px solid var(--surface-border); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow);">
+    <div id="wizard-input-state">
+      <h3 style="font-size: 18px; margin-bottom: 12px;">Describe Your SOP</h3>
+      <textarea id="sop-input" placeholder="e.g. Every morning, I download the new lead list from our Typeform, manually search each name on LinkedIn to find their company size, and then copy the enriched data into our HubSpot CRM." style="width: 100%; height: 120px; padding: 16px; border: 1px solid var(--surface-border); border-radius: var(--radius-sm); font-family: inherit; font-size: 14px; margin-bottom: 16px; resize: vertical;"></textarea>
+      <button id="generate-btn" class="btn btn-primary" style="width: 100%; justify-content: center;">Generate ROSTR Architecture →</button>
+    </div>
+
+    <div id="wizard-loading-state" style="display: none; text-align: center; padding: 40px 0;">
+      <div class="dot" style="width:12px; height:12px; border-radius:50%; background:var(--accent); margin:0 auto 16px; animation:blink 1s infinite;"></div>
+      <p style="color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px;">Extracting intent via ROSTR...</p>
+    </div>
+
+    <div id="wizard-result-state" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--surface-border); padding-bottom: 16px;">
+        <h3 style="font-size: 18px;">Generated Architecture</h3>
+        <button id="reset-btn" class="btn btn-ghost" style="padding: 6px 12px; font-size: 12px;">Start Over</button>
+      </div>
+      
+      <div class="grid-2" style="gap: 16px; margin-bottom: 24px;">
+        <div style="background: var(--surface); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase;">Extracted Intent</div>
+          <p style="font-size: 13px; font-weight: 600; margin-bottom: 4px;">Automated Lead Enrichment & CRM Sync</p>
+          <p style="font-size: 12px; color: var(--muted);">The user wants to automatically enrich inbound form data and sync it to their CRM without manual intervention.</p>
+        </div>
+        <div style="background: var(--surface); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--surface-border);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase;">Proposed Tech Stack</div>
+          <p style="font-size: 13px; font-weight: 600; margin-bottom: 4px;">Make.com + Clay + HubSpot</p>
+          <p style="font-size: 12px; color: var(--muted);">Webhook listener triggers Clay enrichment via LinkedIn/Clearbit API, followed by a HubSpot Create/Update Record action.</p>
+        </div>
+      </div>
+
+      <div style="background: var(--ink); color: #fff; padding: 20px; border-radius: var(--radius-sm); font-family: 'JetBrains Mono', monospace; font-size: 12px; overflow-x: auto;">
+        <div style="color: var(--dim); margin-bottom: 12px;">// Generated Build Prompt for Claude/Antigravity</div>
+        <div style="color: #4ade80;">System: Initialize new Make.com blueprint.</div>
+        <div style="color: #60a5fa;">Trigger: Typeform (New Entry)</div>
+        <div style="color: #60a5fa;">Action 1: Clay (Enrich Person) mapping [Email]</div>
+        <div style="color: #60a5fa;">Action 2: HubSpot (Upsert Contact) mapping [Enriched_Data]</div>
+        <div style="color: #f87171; margin-top: 12px;">> Awaiting execution confirmation...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="services-preview">
   <div class="centered">
     <div class="section-label">Capabilities</div>
@@ -133,5 +183,33 @@
 
 <footer><div class="container">© 2026 Gency AI · patrick.diamitani@gmail.com · <a href="https://linkedin.com/in/diamitani" target="_blank" style="color:var(--muted)">LinkedIn</a></div></footer>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputState = document.getElementById('wizard-input-state');
+    const loadingState = document.getElementById('wizard-loading-state');
+    const resultState = document.getElementById('wizard-result-state');
+    const btn = document.getElementById('generate-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const input = document.getElementById('sop-input');
+
+    btn.addEventListener('click', () => {
+      if(!input.value.trim()) return;
+      inputState.style.display = 'none';
+      loadingState.style.display = 'block';
+      
+      // Mock loading sequence
+      setTimeout(() => {
+        loadingState.style.display = 'none';
+        resultState.style.display = 'block';
+      }, 1500);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      input.value = '';
+      resultState.style.display = 'none';
+      inputState.style.display = 'block';
+    });
+  });
+</script>
 </body>
 </html>
