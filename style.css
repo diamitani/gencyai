@@ -1,16 +1,16 @@
 :root {
-  --bg: #08090e;
-  --surface: #10121a;
-  --surface-border: rgba(255, 255, 255, .07);
-  --ink: #f0f0f5;
-  --muted: #8a8a9a;
-  --dim: #555566;
-  --accent: #7b61ff;
-  --accent-glow: rgba(123, 97, 255, .15);
-  --accent2: #3ecfb4;
-  --radius: 20px;
-  --radius-sm: 14px;
-  --shadow: 0 2px 12px rgba(0, 0, 0, .4);
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --surface-border: #e2e8f0;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --dim: #94a3b8;
+  --accent: #2563eb;
+  --accent-glow: rgba(37, 99, 235, 0.1);
+  --accent2: #0ea5e9;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 * {
@@ -47,14 +47,14 @@ a {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Noise overlay */
+/* Optional subtle grain for texture, made very light */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: .04;
+  opacity: .015;
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -68,13 +68,14 @@ nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(16, 18, 26, .7);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px);
   border: 1px solid var(--surface-border);
   border-radius: 99px;
   padding: 8px 8px 8px 24px;
   max-width: 700px;
   width: calc(100% - 40px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
 .nav-brand {
@@ -107,7 +108,7 @@ nav {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--ink);
-  background: rgba(255, 255, 255, .05);
+  background: var(--surface);
 }
 
 .nav-cta {
@@ -167,12 +168,13 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: 99px;
   padding: 6px 16px 6px 12px;
   font-size: 12px;
-  font-weight: 500;
-  color: var(--muted);
+  font-weight: 600;
+  color: var(--ink);
   letter-spacing: .06em;
   text-transform: uppercase;
   margin-bottom: 32px;
@@ -189,15 +191,8 @@ nav {
 }
 
 @keyframes blink {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: .3;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
 }
 
 .hero h1 {
@@ -255,7 +250,7 @@ nav {
 }
 
 .btn-primary {
-  background: #fff;
+  background: var(--ink);
   color: var(--bg);
 }
 
@@ -271,8 +266,7 @@ nav {
 }
 
 .btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--surface);
 }
 
 .btn-accent {
@@ -281,7 +275,7 @@ nav {
 }
 
 .btn-accent:hover {
-  background: #6a4fe6;
+  background: #1d4ed8;
 }
 
 /* SECTIONS */
@@ -291,7 +285,7 @@ section {
 
 .section-label {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: .12em;
@@ -328,18 +322,19 @@ section {
 
 /* CARDS */
 .card {
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   padding: 32px;
   transition: all .3s cubic-bezier(.25, .46, .45, .94);
   height: 100%;
+  box-shadow: var(--shadow);
 }
 
 .card:hover {
-  border-color: rgba(123, 97, 255, .25);
+  border-color: var(--accent);
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(123, 97, 255, .08);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
 .card h3 {
@@ -363,8 +358,8 @@ section {
   justify-content: center;
   font-size: 20px;
   margin-bottom: 16px;
-  background: var(--accent-glow);
-  border: 1px solid rgba(123, 97, 255, .2);
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
 }
 
 .card ul {
@@ -407,13 +402,14 @@ section {
 
 /* PROCESS STEPS */
 .step-card {
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   padding: 32px;
   position: relative;
   overflow: hidden;
   height: 100%;
+  box-shadow: var(--shadow);
 }
 
 .step-card::before {
@@ -422,14 +418,14 @@ section {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
 }
 
 .step-num {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--accent);
   margin-bottom: 14px;
   letter-spacing: .05em;
@@ -455,29 +451,29 @@ section {
 }
 
 .pricing-card {
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   padding: 28px;
   display: flex;
   flex-direction: column;
   transition: all .3s;
+  box-shadow: var(--shadow);
 }
 
 .pricing-card:hover {
-  border-color: rgba(123, 97, 255, .25);
+  border-color: var(--accent);
 }
 
 .pricing-card.featured {
-  border: 1px solid var(--accent);
+  border: 2px solid var(--accent);
   position: relative;
-  background: linear-gradient(180deg, rgba(123, 97, 255, .06) 0%, var(--surface) 100%);
 }
 
 .pricing-card.featured::before {
   content: "Popular";
   position: absolute;
-  top: -11px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
@@ -551,6 +547,7 @@ section {
   border: 1px solid var(--surface-border);
   color: var(--ink);
   transition: all .2s;
+  background: var(--surface);
 }
 
 .p-btn:hover {
@@ -565,21 +562,22 @@ section {
 }
 
 .p-btn.solid:hover {
-  background: #6a4fe6;
+  background: #1d4ed8;
 }
 
 /* CASE STUDIES */
 .case-card {
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius);
   padding: 28px;
   height: 100%;
+  box-shadow: var(--shadow);
 }
 
 .case-tag {
   display: inline-block;
-  background: var(--accent-glow);
+  background: var(--surface);
   color: var(--accent);
   padding: 3px 10px;
   border-radius: 99px;
@@ -588,7 +586,7 @@ section {
   letter-spacing: .05em;
   text-transform: uppercase;
   margin-bottom: 14px;
-  border: 1px solid rgba(123, 97, 255, .15);
+  border: 1px solid var(--surface-border);
 }
 
 .case-card h4 {
@@ -619,7 +617,7 @@ section {
 .case-metrics .val {
   font-size: 20px;
   font-weight: 800;
-  color: var(--accent2);
+  color: var(--accent);
 }
 
 .case-metrics .lbl {
@@ -632,13 +630,14 @@ section {
 
 /* FOUNDER */
 .founder {
-  background: var(--surface);
+  background: #fff;
   border: 1px solid var(--surface-border);
   border-radius: 24px;
   padding: 48px;
   margin-bottom: 80px;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow);
 }
 
 .founder::after {
@@ -654,7 +653,7 @@ section {
 }
 
 .founder .section-label {
-  color: var(--accent2);
+  color: var(--accent);
 }
 
 .founder p {
@@ -676,8 +675,9 @@ section {
   border-radius: 99px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--muted);
+  color: var(--ink);
   transition: all .2s;
+  background: var(--surface);
 }
 
 .founder-links a:hover {
@@ -763,30 +763,24 @@ footer {
 }
 
 @media(max-width:900px) {
-
   .grid-2,
   .grid-3,
   .grid-4,
   .pricing-grid {
     grid-template-columns: 1fr;
   }
-
   nav {
     padding: 8px 16px;
   }
-
   .nav-links {
     display: none;
   }
-
   .hero {
     padding: 120px 20px 60px;
   }
-
   section {
     padding: 60px 0;
   }
-
   .founder {
     padding: 28px 24px;
   }
